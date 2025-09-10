@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stash Finder v1.3</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="panel stash">
+            <h2>STASHES</h2>
+            <div class="coords-box" id="stashes-container">
+                <div class="stash-header">
+                    <span>Distance</span>
+                    <span>X</span>
+                    <span>Y</span>
+                    <span>Z</span>
+                </div>
+                {% for stash in stashes %}
+                <div class="stash-item">
+                    <span>{{ "%.1fm"|format(stash.distance) }}</span>
+                    <span>{{ "%.2f"|format(stash.x) }}</span>
+                    <span>{{ "%.1f"|format(stash.y) }}</span>
+                    <span>{{ "%.2f"|format(stash.z) }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="panel current">
+            <h2>CURRENT POSITION</h2>
+            <div class="coords-box">
+                <div class="coord-item">
+                    <span>X:</span>
+                    <span id="current-x">{{ "%.2f"|format(current[0]) if current else 'N/A' }}</span>
+                </div>
+                <div class="coord-item">
+                    <span>Y:</span>
+                    <span id="current-y">{{ "%.2f"|format(current[1]) if current else 'N/A' }}</span>
+                </div>
+                <div class="coord-item">
+                    <span>Z:</span>
+                    <span id="current-z">{{ "%.2f"|format(current[2]) if current else 'N/A' }}</span>
+                </div>
+                </div>
+            </div>
+            <button class="scan-btn" id="scan-btn">SCAN</button>
+        </div>
+    </div>
+
+    <script>
+        const _0x20aa18=_0x43dc;function _0x43dc(_0x1f1d46,_0x1521be){const _0x2ec124=_0x2ec1();return _0x43dc=function(_0x43dcb1,_0x160b76){_0x43dcb1=_0x43dcb1-0x113;let _0x29f8a2=_0x2ec124[_0x43dcb1];return _0x29f8a2;},_0x43dc(_0x1f1d46,_0x1521be);}(function(_0x388735,_0x497d19){const _0x5449d9=_0x43dc,_0xa4a46a=_0x388735();while(!![]){try{const _0x36baa2=-parseInt(_0x5449d9(0x12f))/0x1*(-parseInt(_0x5449d9(0x119))/0x2)+parseInt(_0x5449d9(0x11d))/0x3+parseInt(_0x5449d9(0x11c))/0x4*(-parseInt(_0x5449d9(0x11a))/0x5)+parseInt(_0x5449d9(0x116))/0x6*(parseInt(_0x5449d9(0x130))/0x7)+-parseInt(_0x5449d9(0x12c))/0x8*(parseInt(_0x5449d9(0x115))/0x9)+parseInt(_0x5449d9(0x129))/0xa*(parseInt(_0x5449d9(0x11f))/0xb)+parseInt(_0x5449d9(0x114))/0xc*(-parseInt(_0x5449d9(0x137))/0xd);if(_0x36baa2===_0x497d19)break;else _0xa4a46a['push'](_0xa4a46a['shift']());}catch(_0xfac6a4){_0xa4a46a['push'](_0xa4a46a['shift']());}}}(_0x2ec1,0x46b02));const scanBtn=document[_0x20aa18(0x120)](_0x20aa18(0x134)),updateElements={'x':document[_0x20aa18(0x120)](_0x20aa18(0x125)),'y':document[_0x20aa18(0x120)](_0x20aa18(0x11b)),'z':document[_0x20aa18(0x120)](_0x20aa18(0x126)),'stashes':document['getElementById'](_0x20aa18(0x121))};function _0x2ec1(){const _0x4b771b=['40361fJUWqd','14fcQFIF','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','click','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22stash-header\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>Distance</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>X</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>Y</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>Z</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','scan-btn','innerHTML','Scan\x20failed:\x20','13FChmnN','join','textContent','992580vUJWgI','8541eUXDoH','587634vocUNv','error','POST','22NFJcGX','1845035TLwDbS','current-y','4DMRalI','146286QCovme','addEventListener','26092QGOxoV','getElementById','stashes-container','current','m</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>','current-x','current-z','SCANNING...','disabled','410dHEjPO','json','stashes','376mUBMok','map','toFixed'];_0x2ec1=function(){return _0x4b771b;};return _0x2ec1();}scanBtn[_0x20aa18(0x11e)](_0x20aa18(0x132),async()=>{const _0xd04840=_0x20aa18;try{scanBtn['disabled']=!![],scanBtn[_0xd04840(0x113)]=_0xd04840(0x127);const _0x3ff91c=await fetch('/scan',{'method':_0xd04840(0x118)}),_0x461610=await _0x3ff91c[_0xd04840(0x12a)]();if(_0x461610[_0xd04840(0x117)])throw new Error(_0x461610[_0xd04840(0x117)]);updateElements['x'][_0xd04840(0x113)]=_0x461610[_0xd04840(0x122)][0x0]['toFixed'](0x2),updateElements['y'][_0xd04840(0x113)]=_0x461610[_0xd04840(0x122)][0x1][_0xd04840(0x12e)](0x2),updateElements['z'][_0xd04840(0x113)]=_0x461610['current'][0x2][_0xd04840(0x12e)](0x2),updateElements[_0xd04840(0x12b)][_0xd04840(0x135)]=_0xd04840(0x133)+_0x461610['stashes'][_0xd04840(0x12d)](_0x47e696=>'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22stash-item\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+_0x47e696['distance'][_0xd04840(0x12e)](0x1)+_0xd04840(0x123)+_0x47e696['x'][_0xd04840(0x12e)](0x2)+_0xd04840(0x124)+_0x47e696['y'][_0xd04840(0x12e)](0x1)+_0xd04840(0x124)+_0x47e696['z']['toFixed'](0x2)+_0xd04840(0x131))[_0xd04840(0x138)]('')+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20';}catch(_0x40f5db){console[_0xd04840(0x117)]('Scan\x20error:',_0x40f5db),alert(_0xd04840(0x136)+_0x40f5db['message']);}finally{scanBtn[_0xd04840(0x128)]=![],scanBtn[_0xd04840(0x113)]='SCAN';}});
+    </script>
+    <script>
+        const _0x40197d=_0x3048;function _0x3048(_0x2ea145,_0x3aa3d7){const _0x587a95=_0x587a();return _0x3048=function(_0x304803,_0x14be74){_0x304803=_0x304803-0xd4;let _0x39602a=_0x587a95[_0x304803];return _0x39602a;},_0x3048(_0x2ea145,_0x3aa3d7);}(function(_0x103605,_0x330f9d){const _0x1fe3dd=_0x3048,_0x51538f=_0x103605();while(!![]){try{const _0x4e0b99=-parseInt(_0x1fe3dd(0xdc))/0x1*(parseInt(_0x1fe3dd(0xe9))/0x2)+-parseInt(_0x1fe3dd(0xe0))/0x3+-parseInt(_0x1fe3dd(0xd9))/0x4+parseInt(_0x1fe3dd(0xd8))/0x5*(parseInt(_0x1fe3dd(0xdb))/0x6)+parseInt(_0x1fe3dd(0xdd))/0x7+parseInt(_0x1fe3dd(0xea))/0x8+-parseInt(_0x1fe3dd(0xe8))/0x9*(-parseInt(_0x1fe3dd(0xe2))/0xa);if(_0x4e0b99===_0x330f9d)break;else _0x51538f['push'](_0x51538f['shift']());}catch(_0x42d5bc){_0x51538f['push'](_0x51538f['shift']());}}}(_0x587a,0x2da28));function startAutoUpdate(_0x43abd1=0x64){const _0x348c8e=_0x3048,_0x5ac176={'x':document[_0x348c8e(0xe6)]('current-x'),'y':document[_0x348c8e(0xe6)](_0x348c8e(0xd6)),'z':document[_0x348c8e(0xe6)](_0x348c8e(0xe4))};async function _0x121191(){const _0x3b68be=_0x348c8e;try{const _0x36f1b5=await fetch(_0x3b68be(0xe7)),_0x2b6feb=await _0x36f1b5[_0x3b68be(0xd5)]();if(_0x2b6feb[_0x3b68be(0xe3)])throw new Error(_0x2b6feb['error']);_0x5ac176['x'][_0x3b68be(0xd7)]=_0x2b6feb['x']?.['toFixed'](0x2)||'N/A',_0x5ac176['y'][_0x3b68be(0xd7)]=_0x2b6feb['y']?.['toFixed'](0x2)||_0x3b68be(0xd4),_0x5ac176['z'][_0x3b68be(0xd7)]=_0x2b6feb['z']?.[_0x3b68be(0xdf)](0x2)||_0x3b68be(0xd4);}catch(_0x96879d){console[_0x3b68be(0xe3)](_0x3b68be(0xde),_0x96879d),_0x5ac176['x'][_0x3b68be(0xd7)]=_0x5ac176['z'][_0x3b68be(0xd7)]='Error';}}_0x121191(),setInterval(_0x121191,_0x43abd1);}function _0x587a(){const _0x10f9d7=['/current_coords','248949CTzVMo','354866QeQcvj','2337856WDzQCr','N/A','json','current-y','textContent','117245uxpxsI','776576HADpdf','DOMContentLoaded','42PCsQjF','1zilwwZ','2530360mHghAo','Update\x20error:','toFixed','861057VjAkzo','scan-btn','10IqejrP','error','current-z','addEventListener','getElementById'];_0x587a=function(){return _0x10f9d7;};return _0x587a();}window[_0x40197d(0xe5)](_0x40197d(0xda),()=>{const _0x10aeb9=_0x40197d;startAutoUpdate();const _0x24ef5d=document['getElementById'](_0x10aeb9(0xe1));_0x24ef5d[_0x10aeb9(0xe5)]('click',async()=>{});});
+    </script>
+</body>
+</html>
