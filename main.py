@@ -2,19 +2,16 @@ from flask import Flask, render_template, jsonify
 import pyMeow as pm
 import time
 import keyboard
-import os, random, string, ctypes, pyautogui, requests, io, sys, subprocess, hashlib, logging, psutil
-import ctypes.wintypes as wintypes
+import os, random, string, ctypes, sys, subprocess, logging
 from ctypes import windll
 from ctypes import c_int
 from ctypes import c_uint
 from ctypes import c_ulong
 from ctypes import POINTER
 from ctypes import byref
-from base64 import decodebytes
 from threading import Thread
 import socket
 import fade
-
 
 if getattr(sys, 'frozen', False):
     template_folder = os.path.join(sys._MEIPASS, 'templates')
@@ -320,4 +317,5 @@ except:
 if __name__ == "__main__":
     os.system('cls')
     print(main_menu)
+
     app.run(host='0.0.0.0', port=5000, debug=False)
